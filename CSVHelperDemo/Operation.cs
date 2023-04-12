@@ -54,5 +54,16 @@ namespace CSVHelperDemo
             var json = JsonConvert.SerializeObject(records);
             File.WriteAllText(exportFilePath, json);
         }
+        public static void ImplementJsonToCSV()
+        {
+            string importFilePath = @"D:\BridgeLabz\CSVHelperDemo\CSVHelperDemo\csvFile.json";
+            string exportFilePath = @"D:\BridgeLabz\CSVHelperDemo\CSVHelperDemo\data1.csv";
+            List<Model> records = JsonConvert.DeserializeObject<List<Model>>(File.ReadAllText(importFilePath));
+            using (var writer = new StreamWriter(exportFilePath))
+            using (var csvWriter = new CsvWriter(writer, CultureInfo.InvariantCulture))
+            {
+                csvWriter.WriteRecords(records);
+            }
+        }
     }
 }
